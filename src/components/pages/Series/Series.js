@@ -3,11 +3,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import DeleteGenres from './Delete/Delete';
 
-const Genres = () => {
+const Series = () => {
   const [data, setData] = useState([]);
+
   useEffect(() => {
     axios
-      .get('/api/genres')
+      .get('/api/series')
       .then((res) => {
         setData(res.data.data);
       });
@@ -27,7 +28,10 @@ const Genres = () => {
         <td>{item.name}</td>
         <td>
           <DeleteGenres id={item.id} callback={id => handleCallback(id)} />
-          <Link to={'/generos/' + item.id} className='btn btn-warning ml-2'>
+          <Link to={'/series/' + item.id} className='btn btn-warning ml-2'>
+            *
+          </Link>
+          <Link to={'/series/detalhes/' + item.id} className='btn btn-warning ml-2'>
             *
           </Link>
         </td>
@@ -37,7 +41,7 @@ const Genres = () => {
 
   const renderNoContent = () => {
     return (
-      <div>Nenhum gênero foi encontrado.</div>
+      <div>Nenhuma série foi encontrada.</div>
     );
   };
 
@@ -58,11 +62,11 @@ const Genres = () => {
 
   return (
     <div className='container'>
-      <h1>Gêneros</h1>
-      <Link to='/generos/cadastrar'>Novo</Link>
+      <h1>Séries</h1>
+      <Link to='/series/cadastrar'>Novo</Link>
       {data && data.length ? renderTable() : renderNoContent()}
     </div>
   );
 };
 
-export default Genres;
+export default Series;

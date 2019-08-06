@@ -3,12 +3,12 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Form from '../Form/Form.js';
 
-function New() {
+function SeriesNew() {
   const [success, setSuccess] = useState(false);
 
   function save(data) {
     axios
-      .post('/api/genres', {
+      .post('/api/series', {
         name: data,
       })
       .then(res => {
@@ -17,15 +17,15 @@ function New() {
   }
 
   if (success) {
-    return <Redirect to='/generos' />;
+    return <Redirect to='/series' />;
   }
 
   return (
     <>
-      <h1>Novo Gêneros</h1>
+      <h1>Nova Série</h1>
       <Form onSubmit={(data) => save(data)} />
     </>
   );
 }
 
-export default New;
+export default SeriesNew;
