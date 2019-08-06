@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
-function GenresEdit(props) {
+function DeleteSeries(props) {
   const { id, callback } = props;
 
   function remove() {
-    axios.delete('/api/genres/' + id, {}).then(res => callback(id));
+    axios.delete('/api/series/' + id, {}).then(res => callback(id));
   }
 
   return (
@@ -15,4 +15,4 @@ function GenresEdit(props) {
   );
 }
 
-export default GenresEdit;
+export default DeleteSeries;

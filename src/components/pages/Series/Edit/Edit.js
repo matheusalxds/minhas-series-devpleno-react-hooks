@@ -3,21 +3,21 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Form from '../Form/Form.js';
 
-function EditGenres(props) {
+function EditSeries(props) {
   const { params } = props.match;
   const [success, setSuccess] = useState(false);
   const [data, setData] = useState({});
 
   useEffect(() => {
     axios
-      .get('/api/genres/' + params.id).then(res => {
+      .get('/api/series/' + params.id).then(res => {
       setData(res.data);
     });
   }, [params.id]);
 
   function save(data) {
     axios
-      .put('/api/genres/' + params.id, {
+      .put('/api/series/' + params.id, {
         name: data,
       })
       .then(res => {
@@ -26,15 +26,15 @@ function EditGenres(props) {
   }
 
   if (success) {
-    return <Redirect to='/generos' />;
+    return <Redirect to='/series' />;
   }
 
   return (
     <div className='container'>
-      <h1>Editar Gêneros</h1>
+      <h1>Editar Série</h1>
       <Form onSubmit={(dataToSave) => save(dataToSave)} data={data} />
     </div>
   );
 }
 
-export default EditGenres;
+export default EditSeries;

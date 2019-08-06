@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function GenresNew(props) {
+function GenresForm(props) {
   const { onSubmit, data } = props;
   const [name, setName] = useState('');
 
@@ -33,4 +33,4 @@ function GenresNew(props) {
   );
 }
 
-export default GenresNew;
+export default GenresForm;
