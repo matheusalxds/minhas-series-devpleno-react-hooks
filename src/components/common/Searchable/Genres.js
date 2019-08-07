@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function Genres(props) {
   const [data, setData] = useState([]);
+  const { ...newProps } = props;
 
   useEffect(() => {
     axios
@@ -11,10 +12,13 @@ function Genres(props) {
   }, []);
 
   return (
-    <select name="genres" {...props}>
+    <select name="genres" {...newProps}>
       {data && data.length && data.map(item => {
         return (
-          <option value={item.name} key={item.id}>{item.name}</option>
+          <option
+            value={item.id}
+            key={item.id}
+          >{item.name}</option>
         );
       })}
     </select>

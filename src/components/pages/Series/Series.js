@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import DeleteGenres from './Delete/Delete';
+import DeleteSerie from './Delete/Delete';
 
 const Series = () => {
   const [data, setData] = useState([]);
@@ -27,13 +27,13 @@ const Series = () => {
         <th scope='row'>{item.id}</th>
         <td>{item.name}</td>
         <td>
-          <DeleteGenres id={item.id} callback={id => handleCallback(id)} />
-          <Link to={'/series/' + item.id} className='btn btn-warning ml-2'>
-            *
+          <Link to={'/series/' + item.id} className='btn btn-warning'>
+            Editar
           </Link>
-          <Link to={'/series/detalhes/' + item.id} className='btn btn-warning ml-2'>
-            *
+          <Link to={'/series/detalhes/' + item.id} className='btn btn-success ml-2 mr-2'>
+            Profile
           </Link>
+          <DeleteSerie id={item.id} callback={id => handleCallback(id)} />
         </td>
       </tr>
     );

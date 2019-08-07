@@ -10,7 +10,7 @@ function DeleteSeries(props) {
 
   return (
     <button className='btn btn-danger' onClick={remove}>
-      -
+      Deletar
     </button>
   );
 }

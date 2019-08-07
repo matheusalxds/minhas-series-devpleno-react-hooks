@@ -8,20 +8,20 @@ function Profile(props) {
   const { params } = props.match;
   const [success, setSuccess] = useState(false);
   const [data, setData] = useState({});
-  const [mode, setMode] = useState('EDIT');
+  const [mode, setMode] = useState('INFO');
 
   useEffect(() => {
-    axios
-      .get('/api/series/' + params.id)
-      .then(res => setData(res.data));
+    if (params && params.id) {
+      axios
+        .get('/api/series/' + params.id)
+        .then(res => setData(res.data));
+    }
     //  if the params.id change, the page will be reloaded
-  }, [params.id]);
+  }, [params, params.id]);
 
   function save(data) {
     axios
-      .put('/api/series/' + params.id, {
-        name: data,
-      })
+      .put('/api/series/' + params.id, data)
       .then(res => {
         setSuccess(true);
       });
@@ -53,8 +53,8 @@ function Profile(props) {
               <div className='col-9'>
                 <h1 className='font-weight-light text-white'>{data.name}</h1>
                 <div className='lead text-white'>
-                  <Badge color='success'>Assistido</Badge>
-                  <Badge color='warning'>Para assistir</Badge>
+                  {data.status === 'WATCHED' && <Badge color='success'>Assistido</Badge>}
+                  {data.status === 'TO_WATCH' && <Badge color='warning'>Para assistir</Badge>}
                   Gênero: {data.genre}
                 </div>
               </div>
@@ -62,7 +62,7 @@ function Profile(props) {
           </div>
         </div>
       </header>)}
-      <div>
+      <div className='container'>
         <button onClick={() => setMode('EDIT')}>Editar</button>
       </div>
       <div className='container'>

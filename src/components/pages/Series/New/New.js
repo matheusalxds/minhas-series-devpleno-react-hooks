@@ -21,10 +21,10 @@ function SeriesNew() {
   }
 
   return (
-    <>
+    <div className='container'>
       <h1>Nova Série</h1>
       <Form onSubmit={(data) => save(data)} />
-    </>
+    </div>
   );
 }
 

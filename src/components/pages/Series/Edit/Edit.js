@@ -10,16 +10,15 @@ function EditSeries(props) {
 
   useEffect(() => {
     axios
-      .get('/api/series/' + params.id).then(res => {
-      setData(res.data);
-    });
+      .get('/api/series/' + params.id)
+      .then(res => {
+        setData(res.data);
+      });
   }, [params.id]);
 
   function save(data) {
     axios
-      .put('/api/series/' + params.id, {
-        name: data,
-      })
+      .put('/api/series/' + params.id,  data)
       .then(res => {
         setSuccess(true);
       });
@@ -28,6 +27,8 @@ function EditSeries(props) {
   if (success) {
     return <Redirect to='/series' />;
   }
+
+  console.log('data ==>', data);
 
   return (
     <div className='container'>
