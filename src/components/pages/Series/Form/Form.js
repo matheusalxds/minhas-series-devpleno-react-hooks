@@ -3,7 +3,9 @@ import GenresSearchable from '../../../common/Searchable/Genres';
 
 function SeriesForm(props) {
   const { onSubmit, onCancel, data } = props;
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    name: ''
+  });
 
   useEffect(() => {
     setForm(data);
@@ -18,7 +20,6 @@ function SeriesForm(props) {
 
   return (
     <form>
-      <pre>{JSON.stringify(data)}</pre>
       <div className="form-group">
         <label htmlFor="name">Nome</label>
         <input
@@ -26,7 +27,7 @@ function SeriesForm(props) {
           className="form-control"
           id="name"
           placeholder="Nome da série"
-          value={form.name || ''}
+          value={(form && form.name) || ''}
           onChange={onChange('name')}
         />
       </div>
@@ -35,8 +36,7 @@ function SeriesForm(props) {
         <GenresSearchable
           className="form-control"
           multiple={false}
-          value={form.genre || ''}
-          onChange={onChange('genre')}
+          onChange={onChange('genre_id')}
         />
       </div>
       <div className="form-group">
@@ -44,11 +44,36 @@ function SeriesForm(props) {
         <input
           type="text"
           className="form-control"
-          id="comments"
           placeholder="Digite um comentário..."
-          value={form.comments || ''}
-          onChange={event => onChange(event)}
+          value={(form && form.comments) || ''}
+          onChange={onChange('comments')}
         />
+      </div>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="status"
+          id="WATCHED"
+          value="WATCHED"
+          onClick={onChange('status')}
+        />
+        <label className="form-check-label" htmlFor="WATCHED">
+          Assistido
+        </label>
+      </div>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="status"
+          id="TO_WATCH"
+          value="TO_WATCH"
+          onClick={onChange('status')}
+        />
+        <label className="form-check-label" htmlFor="TO_WATCH">
+          Para assistir
+        </label>
       </div>
       <button type="button" className="btn btn-primary" onClick={() => onSubmit(form)}>Salvar</button>
       <button type="button" className="btn btn-outline-secondary ml-2" onClick={onCancel}>Cancelar</button>
