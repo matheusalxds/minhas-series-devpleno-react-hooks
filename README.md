@@ -20,8 +20,16 @@ const [data, setData] = useState({});
     console.log(data)
 ```
 
-### Iniciar API
+### Pré
+Antes de inicializarmos o projeto devemos inicializar uma API
+com o seguinte comando
+
 ```
 node node_modules/minhas-series-server/index.js
 ```
 
+### Inicializar o projeto
+
+```
+yarn start
+```
